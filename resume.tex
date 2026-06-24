@@ -1,8 +1,16 @@
 % !TEX program = xelatex
+% ===== INTERNAL VERSION =====
+% For internal job search / archive. Keeps real system names. Uses corporate email.
 
 \documentclass{resume}
 %\usepackage{zh_CN-Adobefonts_external} % Simplified Chinese Support using external fonts (./fonts/zh_CN-Adobe/)
 %\usepackage{zh_CN-Adobefonts_internal} % Simplified Chinese Support using system fonts
+
+% --- compact layout overrides to fit one page (option B) ---
+\geometry{top=0.5in, bottom=0.4in, left=0.75in, right=0.75in}
+\titlespacing*{\section}{0cm}{*1.0}{*1.0}
+\titlespacing*{\subsection}{0cm}{*1.0}{*0.4}
+\setlist[itemize]{topsep=0.12em, leftmargin=1.5pc}
 
 \begin{document}
 \pagenumbering{gobble} % suppress displaying page number
@@ -10,58 +18,55 @@
 \name{Chang Zhao}
 
 \basicInfo{
-  \email{zhaochang206@gmail.com}\textperiodcentered\ 
-  \phone{(+86) 130-0382-8195}\textperiodcentered\ 
-  \linkedin[Chang Zhao]{https://www.linkedin.com/in/chang-zhao-chaz/}\textperiodcentered\ 
-  \github[ZCplayground]{https://github.com/ZCplayground}}
+  \email{zhaochang206@gmail.com}\textperiodcentered\
+  \phone{(+86) 130-0382-8195}\textperiodcentered\
+  \linkedin[Chang Zhao]{https://www.linkedin.com/in/chang-zhao-chaz/}}
 
 \section{Experience}
 \datedsubsection{\textbf{Microsoft Suzhou, Software Development Engineer}}{Mar. 2021 - Present}
-\textbf{Viva Topics Notification System Development}
+
+\textbf{Agentic AI Workflow, Engineering System, CI/CD Quality for ODSP and Substrate Services }
 \begin{itemize}
-  \item Engaged in cross-functional collaboration with product managers, developers, and designers to implement Viva Topics Notification feature including email and Teams Bot notifications. 
-  \item Implemented Azure Bot Service prototype utilizing Bot Framework, facilitating user engagement and enhancing premium plan conversion rates.
-  \item Orchestrated localization support, expanding user base beyond English-speaking markets.
-  \item Prototyped new notification messages, receiving positive feedback and recognition from partner team for innovative features.
-  \item Conducted systems maintenance and issue management, resolving critical issues and ensuring seamless service operation.
+  \item Built a suite of agentic AI skills (Claude Code) automating functional-test failure triage end-to-end — classifying flaky vs consistently-failing tests across recent builds, pinpointing the PR that introduced a regression, and orchestrating multi-agent per-build root-cause analysis over Kusto, CloudTest, and Azure DevOps APIs — reducing manual log-triage from hours to minutes.
+  \item Improved OneDrive.Storage PR reliability from around 50\% to a consistent 90\%+ with near-zero manual effort, by root-causing the flaky Colorado service crash (assembly verification triggered by OS security updates) and deploying a runtime health-detection plus auto-restart-with-retry mitigation.
+  \item As Functional Test Reliability DRI for TenantSearch, raised CloudBurst FT from around 0\% to a trusted blocking quality gate (7 consecutive green daily jobs), completed the Focus-to-CloudBurst migration, and authored an FT Stability proposal defining ownership, SLAs, and TSG.
+  \item Drove PR Reliability and CloudBurst OCE: categorized build-failure patterns (service unavailability, reboots, setup failures), authored TSGs, and shipped mitigations reused across pipelines.
 \end{itemize}
 
-\textbf{Workflow Manager (WFM) System Migration and Refactoring}
+\textbf{Flaky Test Management System \& 1ES Cross-Org Contribution}
 \begin{itemize}
-  \item Refactored and migrated over 100 projects from old codebase to new project in Office Engineering System.
-  \item Ensured packages were properly packed and uploaded to NuGet following standard procedures, resulting in a more consistent developer experience and increased efficiency. 
-  \item Developed PowerShell scripts to scan and deduplicate DLL references. Significantly reducing DLL dependencies from 1200+ to 270 DLLs. 
-  \item Played a key role in the refactor of Workflow Manager and Service Bus, leading to the successful launch of SharePoint Workflow Manager (SPWFM). 
-  \item Fixed security vulnerabilities by resolving CredScan bugs, OACR errors, and contributed new features to SPWFM. 
+  \item Led flaky-test suppression cleanup in SPO.Core, cutting the suppression list around 50\% (8,261 to 4,580) and removing 300+ high-risk IgnoreErrorSignatures entries while keeping PR reliability stable.
+  \item Designed a custom flaky-test detection query that caught 258 cases missed by the default query; built telemetry and dashboards that reduced daily missed tests from 76 to 5.
+  \item Shipped a deflake-by-error-signature feature into the shared 1ES repo for cross-org reuse, onboarding the 1JS team as the first external customer; automated suppression-list hygiene via daily pipelines.
 \end{itemize}
 
-\datedsubsection{\textbf{Microsoft Beijing, Software Development Intern}}{Jun. 2019 - Sept. 2019}
-\textbf{Privacy Manager team, Cloud+AI Group}
+\textbf{ReviewStar — AI-Powered PR Analytics \& ML Automation}
 \begin{itemize}
-  \item Designed a command line program, Layer 7 Packet Tracer, to locate the IP address of a device that will filter packets at specific application layers.
-  \item Investigated the Protractor, Jasmine, and Selenium tools. Built a framework for the End-to-End frontend testing of the Privacy Review Manager project. Completed 31 test cases with 1k+ lines of code, covered 95%+ scenarios.
-  \item Designed a more flexible, configurable, and more versatile front-end progress bar component.
+  \item Automated the end-to-end ReviewStar ML model-training pipeline (data prep, training, evaluation, deployment validation), cutting per-repo training from around 1 day to 1--2 hours; scaled the approach to the Shell.MMX and Teams repos.
+  \item Built the Analytics Tab (Individual Contributor view) from scratch — new Kusto queries, APIs, and UI selectors — giving developers self-serve PR-velocity insights, iterating on UX from direct user feedback.
+  \item Integrated AI tooling into daily failure-log investigation and built an AI skill to automatically pinpoint regression-introducing commits, accelerating root-cause analysis.
+\end{itemize}
+
+\textbf{Earlier Work}
+\begin{itemize}
+  \item Built the Viva Topics notification system (email and Teams Bot via Azure Bot Service / Bot Framework) with localization support, driving user engagement and premium-plan conversion.
+  \item Refactored and migrated 100+ projects during the Workflow Manager (WFM) system migration and cut DLL dependencies from 1200+ to 270 via PowerShell deduplication scripts.
+  \item Co-led integration of the Office client 2024 July Fork and C++ compiler upgrade into SideVar (1630), resolving hundreds of cross-layer merge and build conflicts and driving deployment to Stage 5 with daily regression review.
 \end{itemize}
 
 \section{Skills}
 \begin{itemize}[parsep=0.5ex]
-  \item \textbf{Programming Skills:} C\#, .NET, TypeScript, JavaScript, PowerShell, C, C++, Data Structure, Algorithm. 
-  \item \textbf{Databases:} Azure Cosmos DB, Microsoft SQL Server.
-  \item \textbf{Web Technologies:} React, FluentUI, ASP.NET, Angular, Laravel, REST, HTML, CSS.
-  \item \textbf{Others:} DevOps, Git, Microsoft Azure, MSBuild, WiX(Windows Installer XML).
+  \item \textbf{Languages:} C\#, .NET, TypeScript, JavaScript, Python, PowerShell, C, C++.
+  \item \textbf{AI \& ML:} AI-assisted development (Claude Code, GitHub Copilot), agentic workflows (Microsoft Agent Framework), Azure Machine Learning, model training \& evaluation.
+  \item \textbf{Data:} Kusto (KQL), Azure Cosmos DB, Microsoft SQL Server, telemetry \& dashboards.
+  \item \textbf{Web:} React, FluentUI, ASP.NET, REST, HTML, CSS.
+  \item \textbf{DevOps:} Azure DevOps, CI/CD pipelines, Git, MSBuild.
 \end{itemize}
 
 \section{Education}
 \datedsubsection{\textbf{Fuzhou University (FZU)}, Fuzhou, China}{Sept. 2016 - Jun. 2020}
 \begin{itemize}
-  \item \textbf{Bachelor of Engineer} - Computer Science and Technology. GPA: 3.59 / 5 (85.69 / 100)
+  \item \textbf{Bachelor of Engineering} - Computer Science and Technology. GPA: 3.59 / 5 (85.69 / 100)
 \end{itemize}
 
-\section{Beyond Work}
-I am passionate about Computer Science knowledge and possess a strong willingness to self-improvement and exploration of new concepts. I derive great satisfaction from contributing to the wider community. As an example, I created Chinese subtitles for the lesson "Memory Hierarchy" in CMU's renowned Introduction to Computer Systems (ICS) video series.
-
-%% Reference
-%\newpage
-%\bibliographystyle{IEEETran}
-%\bibliography{mycite}
 \end{document}
